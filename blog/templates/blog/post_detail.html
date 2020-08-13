@@ -17,4 +17,21 @@
       <p class="article-content">{{ object.content }}</p>
     </div>
   </article>
+
+  <h2>Comments..</h2>
+  <hr>
+  {% if not post.comments.all %}
+    No comments Yet...<a href="{% url 'post_comment' post.pk %}">Add Comments</a>
+  {% else %}
+    <a href="{% url 'post_comment' post.pk %}">Add Comments</a><br><br>
+    {% for comment in post.comments.all %}
+      <strong>
+        {{ comment.author }}
+        {{ comment.created_date }}</strong><br/>
+        {{ comment.text }}
+      <br><br>
+    {% endfor %}
+  {% endif %}
+
+
 {% endblock content %}
